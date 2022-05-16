@@ -33,7 +33,6 @@
 #' @importFrom stats prcomp
 #' @importFrom matrixStats rowVars
 #' @importFrom Rcpp sourceCpp
-#' @importFrom SIMLR SIMLR_Estimate_Number_of_Clusters
 #' 
 #' @useDynLib ccImpute
 #' @export
@@ -54,8 +53,7 @@ impute <- function(logX, useRanks=TRUE, pcaMin, pcaMax, k, consMin=0.65,
         if (nCores > 1){nCores <- nCores - 1} # Use all but one core
     }
     if(missing(k)){
-        k <- SIMLR::SIMLR_Estimate_Number_of_Clusters(logX, NUMC = 2:12)
-        k <- which.min((k$K1+k$K2))+1
+      k <- 1
     }
     
     # Transform the data to distance matrix form
