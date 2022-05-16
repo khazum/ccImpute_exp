@@ -2,7 +2,6 @@
 
 export(impute)
 importFrom(Rcpp,sourceCpp)
-importFrom(SIMLR,SIMLR_Estimate_Number_of_Clusters)
 importFrom(doParallel,registerDoParallel)
 importFrom(foreach,"%dopar%")
 importFrom(foreach,foreach)
