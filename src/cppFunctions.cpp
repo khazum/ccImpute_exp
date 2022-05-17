@@ -214,7 +214,7 @@ Eigen::MatrixXd solveDrops(const Eigen::Map<Eigen::MatrixXd> cm,
                 b[j] = cm.row(rows_indices[j]).dot(em.col(ci));
             }
             
-            Eigen::VectorXd solution = A.ldlt().solve(b);
+            Eigen::VectorXd solution = A.llt().solve(b);
             for(unsigned int j = 0; j < row_count; ++j){
                 em(rows_indices[j],ci) = solution(j);
             }
