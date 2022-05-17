@@ -191,6 +191,7 @@ Eigen::MatrixXd solveDrops(const Eigen::Map<Eigen::MatrixXd> cm,
         col2rows[col].push_back(ids(i,0)-1);
     }
     int row_count = cm.rows()
+        
 #ifdef _OPENMP
 #pragma omp parallel for num_threads(n_cores)
 #endif
@@ -199,7 +200,7 @@ Eigen::MatrixXd solveDrops(const Eigen::Map<Eigen::MatrixXd> cm,
         std::vector<unsigned int> rows_indices = col2rows[ci];
         unsigned int row_count = rows_indices.size();
         if(row_count == 1){
-            em(rows_indices[0],ci) =cm.row(rows_indices[0]).dot(em.col(ci));
+            em(rows_indices[0],ci) = cm.row(rows_indices[0]).dot(em.col(ci));
         }
         else{
             Eigen::MatrixXd A(row_count, row_count);
