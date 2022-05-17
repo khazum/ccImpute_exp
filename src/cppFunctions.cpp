@@ -214,7 +214,7 @@ Eigen::MatrixXd solveDrops(const Eigen::Map<Eigen::MatrixXd> cm,
             for(unsigned int j=0; j < row_count; ++j){
                 b[j] = cm.row(rows_indices[j]).dot(em.col(ci));
             }
-            Eigen::VectorXd solution = A.bdcSvd().solve(b);
+            Eigen::VectorXd solution = A.ColPivHouseholderQR().solve(b);
            
             for(unsigned int j = 0; j < row_count; ++j){
                 em(rows_indices[j],ci) = solution(j);
