@@ -217,7 +217,7 @@ Eigen::MatrixXd solveDrops(const Eigen::Map<Eigen::MatrixXd> cm,
             Eigen::VectorXd solution;
             
             if(cell_count < 1000){
-                solution = A.completeOrthogonalDecomposition().solve(b);
+                solution = A.colPivHouseholderQr().solve(b);
             }
             else{
                 solution = A.llt().solve(b);
