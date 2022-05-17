@@ -113,11 +113,11 @@ impute <- function(logX, useRanks=TRUE, pcaMin, pcaMax, k, consMin=0.65,
 kmeans <- function(input, k, nCores, nDim, kmNStart, kmMax) {
     input <- input[,seq_len(nDim[length(nDim)])] #conserve space
     i <- NULL
-    #pType <- ifelse(.Platform$OS.type=="windows", "PSOCK", "FORK")
-    #cl <- parallel::makeCluster(min(length(nDim), nCores), 
-    #                            outfile = "", type = pType)
+    pType <- ifelse(.Platform$OS.type=="windows", "PSOCK", "FORK")
     cl <- parallel::makeCluster(min(length(nDim), nCores), 
-                                outfile = "")
+                                outfile = "", type = pType)
+    #cl <- parallel::makeCluster(min(length(nDim), nCores), 
+    #                            outfile = "")
     doParallel::registerDoParallel(cl)
 
     results <- foreach::foreach(i = nDim, .packages = c("stats"),
