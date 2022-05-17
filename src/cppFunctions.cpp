@@ -190,7 +190,7 @@ Eigen::MatrixXd solveDrops(const Eigen::Map<Eigen::MatrixXd> cm,
         // account for the fact that r indices are 1 based
         col2rows[col].push_back(ids(i,0)-1);
     }
-    int cell_count = cm.rows()
+    int cell_count = cm.rows();
         
 #ifdef _OPENMP
 #pragma omp parallel for num_threads(n_cores)
