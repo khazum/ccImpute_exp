@@ -190,7 +190,6 @@ Eigen::MatrixXd solveDrops(const Eigen::Map<Eigen::MatrixXd> cm,
         // account for the fact that r indices are 1 based
         col2rows[col].push_back(ids(i,0)-1);
     }
-    int cell_count = cm.rows();
         
 #ifdef _OPENMP
 #pragma omp parallel for num_threads(n_cores)
@@ -214,7 +213,7 @@ Eigen::MatrixXd solveDrops(const Eigen::Map<Eigen::MatrixXd> cm,
             for(unsigned int j=0; j < row_count; ++j){
                 b[j] = cm.row(rows_indices[j]).dot(em.col(ci));
             }
-            Eigen::VectorXd solution = A.ColPivHouseholderQR().solve(b);
+            Eigen::VectorXd solution = A.colPivHouseholderQr().solve(b);
            
             for(unsigned int j = 0; j < row_count; ++j){
                 em(rows_indices[j],ci) = solution(j);
